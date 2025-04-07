@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: lavandaria-backend
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    region: frankfurt
+    envVars:
+      - key: PORT
+        value: 8080
