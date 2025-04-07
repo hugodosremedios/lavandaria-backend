@@ -1,4 +1,3 @@
-# Etapa de build
 FROM maven:3.8.5-openjdk-17-slim AS build
 
 # Define o diretório de trabalho dentro do container
@@ -9,6 +8,9 @@ COPY . .
 
 # Entra na subpasta onde está o projeto Maven
 WORKDIR /app/lavandaria
+
+# Garante que a codificação do sistema seja UTF-8
+ENV MAVEN_OPTS="-Dfile.encoding=UTF-8"
 
 # Compila o projeto e gera o JAR (sem rodar testes)
 RUN mvn clean package -DskipTests
@@ -27,6 +29,7 @@ EXPOSE 8080
 
 # Comando para rodar o app
 CMD ["java", "-jar", "app.jar"]
+
 
 
 
