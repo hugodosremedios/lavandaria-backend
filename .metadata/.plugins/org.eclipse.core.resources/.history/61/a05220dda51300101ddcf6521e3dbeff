@@ -1,0 +1,5 @@
+package com.lucky.lavandaria.service;
+
+public class ProdutoService {
+
+}

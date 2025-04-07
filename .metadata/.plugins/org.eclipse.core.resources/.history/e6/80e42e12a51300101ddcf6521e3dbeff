@@ -1,0 +1,5 @@
+package com.lucky.lavandaria.model;
+
+public class Produto {
+
+}
