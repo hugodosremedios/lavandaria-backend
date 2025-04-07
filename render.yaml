@@ -8,3 +8,12 @@ services:
     envVars:
       - key: PORT
         value: 8080
+      - key: DATABASE_URL
+        value: postgres://lav_user:G0qK1LhkTZdNsciVUOHNBro6e9nBULf6@dpg-cvq37o95pdvs739tfrpg-a/lavandaria_db
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://dpg-cvq37o95pdvs739tfrpg-a/lavandaria_db
+      - key: SPRING_DATASOURCE_USERNAME
+        value: lav_user
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: G0qK1LhkTZdNsciVUOHNBro6e9nBULf6
+
