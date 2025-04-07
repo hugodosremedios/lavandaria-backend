@@ -1,23 +1,32 @@
 # Etapa de build
-FROM maven:3.9.4-eclipse-temurin-17 AS build
+FROM maven:3.8.5-openjdk-17-slim AS build
+
+# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia todos os arquivos para dentro do container
+# Copia o conteúdo do projeto para dentro do container
 COPY . .
 
-# Compila o projeto e cria o .jar (sem testes)
+# Entra na subpasta onde está o projeto Maven
+WORKDIR /app/lavandaria
+
+# Compila o projeto e gera o JAR (sem rodar testes)
 RUN mvn clean package -DskipTests
 
-# Etapa final - imagem mais leve
-FROM eclipse-temurin:17-jdk-alpine
+# Etapa final - imagem leve com apenas o JAR
+FROM openjdk:17-jdk-slim
+
+# Define o diretório de trabalho final
 WORKDIR /app
 
-# Copia o .jar da etapa de build
-COPY --from=build /app/target/*.jar app.jar
+# Copia o JAR gerado para essa imagem final
+COPY --from=build /app/lavandaria/target/*.jar app.jar
 
-# Expõe a porta que a aplicação vai escutar
+# Expõe a porta usada pela aplicação
 EXPOSE 8080
 
-# Comando para iniciar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Comando para rodar o app
+CMD ["java", "-jar", "app.jar"]
+
+
 
